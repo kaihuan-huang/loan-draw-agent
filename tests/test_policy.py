@@ -60,3 +60,19 @@ def test_two_person_threshold():
 
 def test_block_findings_are_block_severity():
     assert Severity.BLOCK.value == "block"
+
+
+# Found by the hard eval set (2026-10-14): Qwen2.5-7B copied "MES - 7156" as printed, and the repeat-funding check
+# compared raw strings, so five already-funded invoices went to an officer instead of on hold.
+@pytest.mark.parametrize("printed", ["MES - 7156", "mes7156", "MES_7156", " MES-7156 "])
+def test_repeat_invoice_matches_however_the_number_is_printed(printed):
+    c = next(c for c in CASES if c["scenario"] == "repeat_invoice")
+    d = data.draw(c["draw_id"])
+    loan = data.loan(d.loan_id)
+    ex = {i: data.extraction(v) for i, v in c["truth"].items()}
+    inv = next(i for i in ex if i.endswith("invoice"))
+    loan.funded_invoices = ["MES-7156"]
+    ex[inv] = ex[inv].model_copy(update={"invoice_number": printed})
+    fs = policy.check(loan, d, {i: data.document(i).text for i in d.document_ids}, ex)
+    assert "repeat_invoice" in {f.code for f in fs}
+    assert policy.route(fs) == "hold"
