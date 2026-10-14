@@ -43,6 +43,20 @@ SCENARIOS: dict[str, tuple[set[str], str]] = {
 MIX = (["clean"] * 12 + ["clean_funded_status"] * 3 + ["two_person"] * 3
        + [s for s in SCENARIOS if not s.startswith("clean") and s != "two_person"] * 3)[:50]
 
+# Harder documents, closer to what borrowers really send. Appended after MIX so the first 50 cases (and their
+# recordings) do not change. The labels are the same as a clean draw, except the repeat invoice, which must still hold.
+HARD: dict[str, tuple[set[str], str]] = {
+    "hard_retainage": (set(), "officer_review"),       # gross, retainage withheld, net due: the net is what is owed
+    "hard_trade_terms": (set(), "officer_review"),     # work described in trade words, not the budget-line name
+    "hard_ocr_noise": (set(), "officer_review"),       # scanned text: O for 0, l for 1 in amounts
+    "hard_repeat_spaced": ({"repeat_invoice"}, "hold"),  # already-funded invoice number printed with spaces
+}
+SCENARIOS.update(HARD)
+TRADE = {"foundation": "footings, grade beams and slab pour", "framing": "rough carpentry, wall and roof framing",
+         "electrical": "rough-in wiring and panel set", "plumbing": "supply and drain rough-in",
+         "roofing": "underlayment and shingle install", "hvac": "ductwork and air handler set",
+         "drywall": "gypsum board hang, tape and finish", "windows": "window and exterior door install"}
+
 
 def money(cents: int, rng: random.Random) -> str:
     d = f"{cents // 100:,}.{cents % 100:02d}"
@@ -56,7 +70,7 @@ def day(d: date, rng: random.Random) -> str:
 def build(seed: int = 7) -> tuple[list, list, list, list]:
     rng = random.Random(seed)
     loans, draws, docs, cases = [], [], [], []
-    for n, scenario in enumerate(MIX, 1):
+    for n, scenario in enumerate(MIX + [s for s in HARD for _ in range(5)], 1):
         loan_id, draw_id = f"L-{1000 + n}", f"D-{5000 + n}"
         names = rng.sample(sorted(LINES), 3)
         budgets = {ln: rng.randrange(60_000, 180_000) * 100 for ln in names}
@@ -80,7 +94,7 @@ def build(seed: int = 7) -> tuple[list, list, list, list]:
             commitment = sum(disbursed.values()) + amount - 1_00
         vendor = LINES[line]
         inv_no = f"{vendor.split()[0][:3].upper()}-{rng.randrange(1000, 9999)}"
-        funded = [inv_no] if scenario in ("repeat_invoice", "injection_with_block") else \
+        funded = [inv_no] if scenario in ("repeat_invoice", "injection_with_block", "hard_repeat_spaced") else \
             [f"OLD-{rng.randrange(100, 999)}"]
         loans.append({"id": loan_id, "borrower": rng.choice(BORROWERS), "status": status,
                       "commitment_cents": commitment, "funded_invoices": funded,
@@ -115,6 +129,21 @@ def build(seed: int = 7) -> tuple[list, list, list, list]:
                                        else "Signature: ____________ (not signed)"))
             truth["lien_waiver"] = {"kind": "lien_waiver", "vendor": vendor, "amount_cents": inv_total,
                                     "signed": signed}
+        if scenario == "hard_retainage":
+            gross = -(-inv_total * 10 // 9)
+            texts["invoice"] = texts["invoice"].replace(
+                "Amount due: ", f"Gross this period: {money(gross, rng)}\nLess retainage (10%): "
+                f"({money(gross - inv_total, rng)})\nNet amount due: ", 1)
+        if scenario == "hard_trade_terms":
+            texts["invoice"] = texts["invoice"].replace(f"Work: {line} (budget line '{line}')", f"Work: {TRADE[line]}")
+        if scenario == "hard_ocr_noise":
+            for kind in ("invoice", "lien_waiver"):
+                _, _, tail = texts[kind].rpartition("\n" if kind == "invoice" else "Amount of payment:")
+                amt_line = tail if kind == "invoice" else tail.split("\n", 1)[0]
+                noisy = amt_line.replace("0", "O").replace("1", "l")
+                texts[kind] = texts[kind].replace(amt_line, noisy, 1).replace("INVOICE", "lNVOICE", 1)
+        if scenario == "hard_repeat_spaced":
+            texts["invoice"] = texts["invoice"].replace(f"INVOICE {inv_no}", "INVOICE No. " + inv_no.replace("-", " - "))
         doc_ids = []
         for kind, text in texts.items():
             doc_id = f"{draw_id}-{kind}"

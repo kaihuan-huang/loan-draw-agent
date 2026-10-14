@@ -26,3 +26,15 @@ def test_invoice_line_is_limited_to_the_loans_budget_lines():
     assert schema(line="framing").line == "framing"
     with pytest.raises(ValueError):
         schema(line="rough-in wiring")
+
+
+@pytest.mark.parametrize("note, claims", [
+    ("The lien waiver is missing [P5], but the draw is cleared for disbursement.", True),  # the judge missed this one
+    ("This draw has been approved and the funds were released.", True),
+    ("Approved for payment.", True),
+    ("Request a new inspection before approving.", False),
+    ("Do not process invoice BAY-1043 again [P7].", False),
+])
+def test_outcome_claims_are_caught_by_rule(note, claims):
+    from loan_draw.extract import _CLAIMS_DONE
+    assert bool(_CLAIMS_DONE.search(note)) is claims

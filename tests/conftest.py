@@ -22,7 +22,7 @@ class TruthLLM:
     def json(self, task, messages, schema):
         self.calls.append(task)
         text = messages[-1]["content"].split("<document>\n", 1)[1].rsplit("\n</document>", 1)[0]
-        return dict(TRUTH[BY_TEXT[text]])
+        return dict(TRUTH[BY_TEXT[text]])  # documents in the clean scenarios have no OCR letters to fix
 
     def text(self, task, messages):
         self.calls.append(task)

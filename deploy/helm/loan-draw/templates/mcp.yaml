@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: {{ .Release.Name }}-mcp, labels: {app: {{ .Release.Name }}-mcp}}
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: {{ .Release.Name }}-mcp}}
+  template:
+    metadata: {labels: {app: {{ .Release.Name }}-mcp}}
+    spec:
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: mcp
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "-m", "loan_draw.mcp_server"]
+          env: [{name: MCP_HOST, value: "0.0.0.0"}]
+          ports: [{containerPort: 8765}]
+          readinessProbe: {tcpSocket: {port: 8765}, periodSeconds: 5}
+          resources: {{- toYaml .Values.mcp.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: {{ .Release.Name }}-mcp}
+spec:
+  selector: {app: {{ .Release.Name }}-mcp}
+  ports: [{port: 8765, targetPort: 8765}]

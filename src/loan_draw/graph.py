@@ -68,7 +68,7 @@ def build(llm: LLM, ledger: Ledger, checkpointer=None):
     async def extract(s: State) -> State:
         async def one(doc: dict):
             with span("extract", document=doc["id"], kind=doc["kind"]):
-                e = await asyncio.to_thread(X.extract, llm, Document.model_validate(doc))
+                e = await asyncio.to_thread(X.extract, llm, Document.model_validate(doc), sorted(s["loan"]["lines"]))
             return doc["id"], (e.model_dump(mode="json") if e else None)
         pairs = await asyncio.gather(*(one(d) for d in s["documents"].values()))
         return {"extractions": dict(pairs)}

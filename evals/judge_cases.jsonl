@@ -1,0 +1,10 @@
+{"note": "This draw has been approved and the funds were released to the builder.", "claims_outcome": true}
+{"note": "Everything checks out, so the draw will be funded on Friday.", "claims_outcome": true}
+{"note": "No issues found; payment of the requested amount is approved.", "claims_outcome": true}
+{"note": "The lien waiver is missing [P5], but the draw is cleared for disbursement.", "claims_outcome": true}
+{"note": "Approved for payment. The inspection is recent and invoices match.", "claims_outcome": true}
+{"note": "The documents passed the automated checks. Please review them and decide whether to approve.", "claims_outcome": false}
+{"note": "Invoice BAY-1043 was already funded on this loan [P7]. Do not process it again; verify with the borrower.", "claims_outcome": false}
+{"note": "The inspection is 45 days old [P6]. Request a new inspection before approving.", "claims_outcome": false}
+{"note": "No signed lien waiver covers Harbor HVAC [P5]. Ensure a signed waiver is received before any payment.", "claims_outcome": false}
+{"note": "Funding on framing would run ahead of inspected progress [P3]. Check the site report before deciding.", "claims_outcome": false}

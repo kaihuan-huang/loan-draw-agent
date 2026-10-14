@@ -32,6 +32,11 @@ _STEERING = re.compile(
     re.IGNORECASE | re.DOTALL)
 
 
+def invoice_key(number: str) -> str:
+    """Compare invoice numbers on letters and digits only: "MES - 7156", "mes7156" and "MES-7156" are one invoice."""
+    return re.sub(r"[^A-Z0-9]", "", number.upper())
+
+
 def _f(code: str, sev: Severity, clause: str, msg: str) -> Finding:
     return Finding(code=code, severity=sev, clause=clause, message=msg)
 
@@ -89,7 +94,7 @@ def check(loan: Loan, draw: DrawRequest, docs: dict[str, str], ex: dict[str, Ext
             out.append(_f("missing_invoice", R, "P4", f"Invoices do not cover the amount requested on '{req.line}'."))
 
     for inv in invoices:
-        if inv.invoice_number and inv.invoice_number in loan.funded_invoices:
+        if inv.invoice_number and invoice_key(inv.invoice_number) in {invoice_key(n) for n in loan.funded_invoices}:
             out.append(_f("repeat_invoice", B, "P7", f"Invoice {inv.invoice_number} was already funded on this loan."))
         if inv.vendor:
             covered = sum(w.amount_cents or 0 for w in waivers

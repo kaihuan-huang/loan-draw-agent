@@ -1148,5 +1148,465 @@
     "disbursed_cents": 3156740
    }
   }
+ },
+ {
+  "id": "L-1051",
+  "borrower": "Marigold Lane Partners",
+  "status": "active",
+  "commitment_cents": 38313000,
+  "funded_invoices": [
+   "OLD-470"
+  ],
+  "lines": {
+   "foundation": {
+    "budget_cents": 6114100,
+    "disbursed_cents": 1222820
+   },
+   "framing": {
+    "budget_cents": 16519400,
+    "disbursed_cents": 1651940
+   },
+   "electrical": {
+    "budget_cents": 15679500,
+    "disbursed_cents": 1567950
+   }
+  }
+ },
+ {
+  "id": "L-1052",
+  "borrower": "Seabright Residential",
+  "status": "active",
+  "commitment_cents": 29966800,
+  "funded_invoices": [
+   "OLD-531"
+  ],
+  "lines": {
+   "windows": {
+    "budget_cents": 10269700,
+    "disbursed_cents": 0
+   },
+   "hvac": {
+    "budget_cents": 8106200,
+    "disbursed_cents": 0
+   },
+   "roofing": {
+    "budget_cents": 11590900,
+    "disbursed_cents": 2318180
+   }
+  }
+ },
+ {
+  "id": "L-1053",
+  "borrower": "Juniper Court Builders",
+  "status": "active",
+  "commitment_cents": 29726800,
+  "funded_invoices": [
+   "OLD-341"
+  ],
+  "lines": {
+   "hvac": {
+    "budget_cents": 9508300,
+    "disbursed_cents": 1901660
+   },
+   "foundation": {
+    "budget_cents": 10888600,
+    "disbursed_cents": 1088860
+   },
+   "windows": {
+    "budget_cents": 9329900,
+    "disbursed_cents": 2798970
+   }
+  }
+ },
+ {
+  "id": "L-1054",
+  "borrower": "Alder Street Homes LLC",
+  "status": "active",
+  "commitment_cents": 19885200,
+  "funded_invoices": [
+   "OLD-338"
+  ],
+  "lines": {
+   "electrical": {
+    "budget_cents": 6485200,
+    "disbursed_cents": 1945560
+   },
+   "plumbing": {
+    "budget_cents": 7341200,
+    "disbursed_cents": 734120
+   },
+   "framing": {
+    "budget_cents": 6058800,
+    "disbursed_cents": 1817640
+   }
+  }
+ },
+ {
+  "id": "L-1055",
+  "borrower": "Juniper Court Builders",
+  "status": "active",
+  "commitment_cents": 43241700,
+  "funded_invoices": [
+   "OLD-145"
+  ],
+  "lines": {
+   "drywall": {
+    "budget_cents": 13813800,
+    "disbursed_cents": 2762760
+   },
+   "windows": {
+    "budget_cents": 15302200,
+    "disbursed_cents": 1530220
+   },
+   "plumbing": {
+    "budget_cents": 14125700,
+    "disbursed_cents": 0
+   }
+  }
+ },
+ {
+  "id": "L-1056",
+  "borrower": "Marigold Lane Partners",
+  "status": "active",
+  "commitment_cents": 42103400,
+  "funded_invoices": [
+   "OLD-754"
+  ],
+  "lines": {
+   "electrical": {
+    "budget_cents": 16423900,
+    "disbursed_cents": 4927170
+   },
+   "windows": {
+    "budget_cents": 12496200,
+    "disbursed_cents": 0
+   },
+   "drywall": {
+    "budget_cents": 13183300,
+    "disbursed_cents": 3954990
+   }
+  }
+ },
+ {
+  "id": "L-1057",
+  "borrower": "Cypress Point Construction",
+  "status": "active",
+  "commitment_cents": 28243900,
+  "funded_invoices": [
+   "OLD-500"
+  ],
+  "lines": {
+   "hvac": {
+    "budget_cents": 11476700,
+    "disbursed_cents": 2295340
+   },
+   "plumbing": {
+    "budget_cents": 6673100,
+    "disbursed_cents": 2001930
+   },
+   "foundation": {
+    "budget_cents": 10094100,
+    "disbursed_cents": 3028230
+   }
+  }
+ },
+ {
+  "id": "L-1058",
+  "borrower": "Seabright Residential",
+  "status": "active",
+  "commitment_cents": 40393100,
+  "funded_invoices": [
+   "OLD-756"
+  ],
+  "lines": {
+   "electrical": {
+    "budget_cents": 17571500,
+    "disbursed_cents": 1757150
+   },
+   "framing": {
+    "budget_cents": 10780500,
+    "disbursed_cents": 1078050
+   },
+   "hvac": {
+    "budget_cents": 12041100,
+    "disbursed_cents": 0
+   }
+  }
+ },
+ {
+  "id": "L-1059",
+  "borrower": "Alder Street Homes LLC",
+  "status": "active",
+  "commitment_cents": 27961900,
+  "funded_invoices": [
+   "OLD-957"
+  ],
+  "lines": {
+   "plumbing": {
+    "budget_cents": 12830900,
+    "disbursed_cents": 0
+   },
+   "foundation": {
+    "budget_cents": 8251600,
+    "disbursed_cents": 2475480
+   },
+   "electrical": {
+    "budget_cents": 6879400,
+    "disbursed_cents": 2063820
+   }
+  }
+ },
+ {
+  "id": "L-1060",
+  "borrower": "Juniper Court Builders",
+  "status": "active",
+  "commitment_cents": 39499100,
+  "funded_invoices": [
+   "OLD-630"
+  ],
+  "lines": {
+   "foundation": {
+    "budget_cents": 14140200,
+    "disbursed_cents": 1414020
+   },
+   "plumbing": {
+    "budget_cents": 11301600,
+    "disbursed_cents": 3390480
+   },
+   "electrical": {
+    "budget_cents": 14057300,
+    "disbursed_cents": 1405730
+   }
+  }
+ },
+ {
+  "id": "L-1061",
+  "borrower": "Seabright Residential",
+  "status": "active",
+  "commitment_cents": 38240400,
+  "funded_invoices": [
+   "OLD-764"
+  ],
+  "lines": {
+   "drywall": {
+    "budget_cents": 6499700,
+    "disbursed_cents": 1299940
+   },
+   "hvac": {
+    "budget_cents": 14754200,
+    "disbursed_cents": 0
+   },
+   "plumbing": {
+    "budget_cents": 16986500,
+    "disbursed_cents": 5095950
+   }
+  }
+ },
+ {
+  "id": "L-1062",
+  "borrower": "Seabright Residential",
+  "status": "active",
+  "commitment_cents": 20695200,
+  "funded_invoices": [
+   "OLD-929"
+  ],
+  "lines": {
+   "windows": {
+    "budget_cents": 8343000,
+    "disbursed_cents": 2502900
+   },
+   "hvac": {
+    "budget_cents": 6306300,
+    "disbursed_cents": 1891890
+   },
+   "framing": {
+    "budget_cents": 6045900,
+    "disbursed_cents": 604590
+   }
+  }
+ },
+ {
+  "id": "L-1063",
+  "borrower": "Alder Street Homes LLC",
+  "status": "active",
+  "commitment_cents": 39909800,
+  "funded_invoices": [
+   "OLD-181"
+  ],
+  "lines": {
+   "electrical": {
+    "budget_cents": 12610500,
+    "disbursed_cents": 0
+   },
+   "roofing": {
+    "budget_cents": 12686700,
+    "disbursed_cents": 0
+   },
+   "framing": {
+    "budget_cents": 14612600,
+    "disbursed_cents": 1461260
+   }
+  }
+ },
+ {
+  "id": "L-1064",
+  "borrower": "Marigold Lane Partners",
+  "status": "active",
+  "commitment_cents": 42823000,
+  "funded_invoices": [
+   "OLD-431"
+  ],
+  "lines": {
+   "framing": {
+    "budget_cents": 9773300,
+    "disbursed_cents": 977330
+   },
+   "electrical": {
+    "budget_cents": 16629800,
+    "disbursed_cents": 1662980
+   },
+   "windows": {
+    "budget_cents": 16419900,
+    "disbursed_cents": 0
+   }
+  }
+ },
+ {
+  "id": "L-1065",
+  "borrower": "Oak Hollow Development",
+  "status": "active",
+  "commitment_cents": 30173100,
+  "funded_invoices": [
+   "OLD-795"
+  ],
+  "lines": {
+   "hvac": {
+    "budget_cents": 9111600,
+    "disbursed_cents": 0
+   },
+   "windows": {
+    "budget_cents": 10182200,
+    "disbursed_cents": 1018220
+   },
+   "roofing": {
+    "budget_cents": 10879300,
+    "disbursed_cents": 1087930
+   }
+  }
+ },
+ {
+  "id": "L-1066",
+  "borrower": "Oak Hollow Development",
+  "status": "active",
+  "commitment_cents": 46197500,
+  "funded_invoices": [
+   "MES-7156"
+  ],
+  "lines": {
+   "windows": {
+    "budget_cents": 13602700,
+    "disbursed_cents": 0
+   },
+   "hvac": {
+    "budget_cents": 15027300,
+    "disbursed_cents": 3005460
+   },
+   "roofing": {
+    "budget_cents": 17567500,
+    "disbursed_cents": 5270250
+   }
+  }
+ },
+ {
+  "id": "L-1067",
+  "borrower": "Marigold Lane Partners",
+  "status": "active",
+  "commitment_cents": 33767300,
+  "funded_invoices": [
+   "PIN-5767"
+  ],
+  "lines": {
+   "drywall": {
+    "budget_cents": 9324600,
+    "disbursed_cents": 1864920
+   },
+   "foundation": {
+    "budget_cents": 10064100,
+    "disbursed_cents": 0
+   },
+   "hvac": {
+    "budget_cents": 14378600,
+    "disbursed_cents": 0
+   }
+  }
+ },
+ {
+  "id": "L-1068",
+  "borrower": "Marigold Lane Partners",
+  "status": "active",
+  "commitment_cents": 30120000,
+  "funded_invoices": [
+   "PIN-5934"
+  ],
+  "lines": {
+   "drywall": {
+    "budget_cents": 6034200,
+    "disbursed_cents": 1206840
+   },
+   "windows": {
+    "budget_cents": 13433300,
+    "disbursed_cents": 0
+   },
+   "roofing": {
+    "budget_cents": 10652500,
+    "disbursed_cents": 2130500
+   }
+  }
+ },
+ {
+  "id": "L-1069",
+  "borrower": "Alder Street Homes LLC",
+  "status": "active",
+  "commitment_cents": 35139300,
+  "funded_invoices": [
+   "PIN-5329"
+  ],
+  "lines": {
+   "drywall": {
+    "budget_cents": 15272900,
+    "disbursed_cents": 0
+   },
+   "roofing": {
+    "budget_cents": 7957000,
+    "disbursed_cents": 0
+   },
+   "electrical": {
+    "budget_cents": 11909400,
+    "disbursed_cents": 1190940
+   }
+  }
+ },
+ {
+  "id": "L-1070",
+  "borrower": "Alder Street Homes LLC",
+  "status": "active",
+  "commitment_cents": 30424300,
+  "funded_invoices": [
+   "MES-3608"
+  ],
+  "lines": {
+   "windows": {
+    "budget_cents": 17842400,
+    "disbursed_cents": 0
+   },
+   "electrical": {
+    "budget_cents": 6005200,
+    "disbursed_cents": 0
+   },
+   "roofing": {
+    "budget_cents": 6576700,
+    "disbursed_cents": 1973010
+   }
+  }
  }
 ]

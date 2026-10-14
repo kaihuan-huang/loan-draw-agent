@@ -77,6 +77,8 @@ class Gateway:
         if self.cassette and self.cassette.mode == "replay":
             raise CassetteMiss(f"no recording for {task} ({key}); re-record with LLM_CASSETTE=record")
         import litellm  # imported lazily: replay runs never load it
+        litellm.suppress_debug_info = True
+        logging.getLogger("LiteLLM").setLevel(logging.WARNING)
         kw: dict = {"messages": messages, "temperature": 0, "timeout": self.timeout}
         if js:
             kw["response_format"] = {"type": "json_schema",

@@ -718,5 +718,305 @@
   "id": "D-5050-lien_waiver",
   "kind": "lien_waiver",
   "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Harbor HVAC\nAmount of payment: $ 14,835.60\nSignature: /s/ Harbor Manager"
+ },
+ {
+  "id": "D-5051-invoice",
+  "kind": "invoice",
+  "text": "INVOICE SUM-8549\nFrom: Summit Concrete\nBill to: Marigold Lane Partners\nDate: 09/28/2026\nWork: foundation (budget line 'foundation')\nGross this period: $31,059.45\nLess retainage (10%): ($3,105.95)\nNet amount due: USD 27,953.50"
+ },
+ {
+  "id": "D-5051-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1051\nInspected on Sep 27, 2026 by third-party inspector\n- foundation: 70% complete\n- framing: 20% complete\n- electrical: 20% complete"
+ },
+ {
+  "id": "D-5051-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Summit Concrete\nAmount of payment: $ 27,953.50\nSignature: /s/ Summit Manager"
+ },
+ {
+  "id": "D-5052-invoice",
+  "kind": "invoice",
+  "text": "INVOICE MES-2579\nFrom: Mesa Windows & Doors\nBill to: Seabright Residential\nDate: 2026-09-16\nWork: windows (budget line 'windows')\nGross this period: $55,158.34\nLess retainage (10%): (5,515.84 USD)\nNet amount due: USD 49,642.50"
+ },
+ {
+  "id": "D-5052-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1052\nInspected on 2026-09-15 by third-party inspector\n- windows: 50% complete\n- hvac: 40% complete\n- roofing: 40% complete"
+ },
+ {
+  "id": "D-5052-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Mesa Windows & Doors\nAmount of payment: USD 49,642.50\nSignature: /s/ Mesa Manager"
+ },
+ {
+  "id": "D-5053-invoice",
+  "kind": "invoice",
+  "text": "INVOICE HAR-5019\nFrom: Harbor HVAC\nBill to: Juniper Court Builders\nDate: 09/21/2026\nWork: hvac (budget line 'hvac')\nGross this period: USD 40,569.12\nLess retainage (10%): (USD 4,056.92)\nNet amount due: USD 36,512.20"
+ },
+ {
+  "id": "D-5053-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1053\nInspected on Sep 20, 2026 by third-party inspector\n- hvac: 60% complete\n- foundation: 20% complete\n- windows: 40% complete"
+ },
+ {
+  "id": "D-5053-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Harbor HVAC\nAmount of payment: 36,512.20 USD\nSignature: /s/ Harbor Manager"
+ },
+ {
+  "id": "D-5054-invoice",
+  "kind": "invoice",
+  "text": "INVOICE NOR-5811\nFrom: Northgate Electric\nBill to: Alder Street Homes LLC\nDate: 2026-09-29\nWork: electrical (budget line 'electrical')\nGross this period: $ 28,456.45\nLess retainage (10%): (2,845.65 USD)\nNet amount due: USD 25,610.80"
+ },
+ {
+  "id": "D-5054-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1054\nInspected on 2026-09-28 by third-party inspector\n- electrical: 70% complete\n- plumbing: 40% complete\n- framing: 60% complete"
+ },
+ {
+  "id": "D-5054-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Northgate Electric\nAmount of payment: USD 25,610.80\nSignature: /s/ Northgate Manager"
+ },
+ {
+  "id": "D-5055-invoice",
+  "kind": "invoice",
+  "text": "INVOICE PIN-3316\nFrom: Pinecrest Drywall\nBill to: Juniper Court Builders\nDate: 2026-09-22\nWork: drywall (budget line 'drywall')\nGross this period: USD 73,648.89\nLess retainage (10%): (7,364.89 USD)\nNet amount due: USD 66,284.00"
+ },
+ {
+  "id": "D-5055-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1055\nInspected on 2026-09-21 by third-party inspector\n- drywall: 70% complete\n- windows: 40% complete\n- plumbing: 40% complete"
+ },
+ {
+  "id": "D-5055-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Pinecrest Drywall\nAmount of payment: 66,284.00 USD\nSignature: /s/ Pinecrest Manager"
+ },
+ {
+  "id": "D-5056-invoice",
+  "kind": "invoice",
+  "text": "INVOICE NOR-3532\nFrom: Northgate Electric\nBill to: Marigold Lane Partners\nDate: 09/28/2026\nWork: rough-in wiring and panel set\nAmount due: USD 29,609.80"
+ },
+ {
+  "id": "D-5056-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1056\nInspected on Sep 27, 2026 by third-party inspector\n- electrical: 50% complete\n- windows: 60% complete\n- drywall: 40% complete"
+ },
+ {
+  "id": "D-5056-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Northgate Electric\nAmount of payment: $ 29,609.80\nSignature: /s/ Northgate Manager"
+ },
+ {
+  "id": "D-5057-invoice",
+  "kind": "invoice",
+  "text": "INVOICE HAR-4230\nFrom: Harbor HVAC\nBill to: Cypress Point Construction\nDate: 2026-09-18\nWork: ductwork and air handler set\nAmount due: $31,450.10"
+ },
+ {
+  "id": "D-5057-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1057\nInspected on Sep 17, 2026 by third-party inspector\n- hvac: 50% complete\n- plumbing: 20% complete\n- foundation: 40% complete"
+ },
+ {
+  "id": "D-5057-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Harbor HVAC\nAmount of payment: $31,450.10\nSignature: /s/ Harbor Manager"
+ },
+ {
+  "id": "D-5058-invoice",
+  "kind": "invoice",
+  "text": "INVOICE NOR-3334\nFrom: Northgate Electric\nBill to: Seabright Residential\nDate: 09/28/2026\nWork: rough-in wiring and panel set\nAmount due: 65,768.00 USD"
+ },
+ {
+  "id": "D-5058-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1058\nInspected on 09/27/2026 by third-party inspector\n- electrical: 50% complete\n- framing: 60% complete\n- hvac: 20% complete"
+ },
+ {
+  "id": "D-5058-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Northgate Electric\nAmount of payment: USD 65,768.00\nSignature: /s/ Northgate Manager"
+ },
+ {
+  "id": "D-5059-invoice",
+  "kind": "invoice",
+  "text": "INVOICE COA-3075\nFrom: Coastal Plumbing Co\nBill to: Alder Street Homes LLC\nDate: Sep 15, 2026\nWork: supply and drain rough-in\nAmount due: $74,515.40"
+ },
+ {
+  "id": "D-5059-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1059\nInspected on 09/14/2026 by third-party inspector\n- plumbing: 60% complete\n- foundation: 60% complete\n- electrical: 40% complete"
+ },
+ {
+  "id": "D-5059-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Coastal Plumbing Co\nAmount of payment: $74,515.40\nSignature: /s/ Coastal Manager"
+ },
+ {
+  "id": "D-5060-invoice",
+  "kind": "invoice",
+  "text": "INVOICE SUM-7549\nFrom: Summit Concrete\nBill to: Juniper Court Builders\nDate: Sep 18, 2026\nWork: footings, grade beams and slab pour\nAmount due: $70,360.00"
+ },
+ {
+  "id": "D-5060-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1060\nInspected on 2026-09-17 by third-party inspector\n- foundation: 60% complete\n- plumbing: 20% complete\n- electrical: 60% complete"
+ },
+ {
+  "id": "D-5060-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Summit Concrete\nAmount of payment: USD 70,360.00\nSignature: /s/ Summit Manager"
+ },
+ {
+  "id": "D-5061-invoice",
+  "kind": "invoice",
+  "text": "lNVOICE PIN-6017\nFrom: Pinecrest Drywall\nBill to: Seabright Residential\nDate: 09/21/2026\nWork: drywall (budget line 'drywall')\nAmount due: USD 34,492.2O"
+ },
+ {
+  "id": "D-5061-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1061\nInspected on Sep 20, 2026 by third-party inspector\n- drywall: 80% complete\n- hvac: 40% complete\n- plumbing: 60% complete"
+ },
+ {
+  "id": "D-5061-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Pinecrest Drywall\nAmount of payment: 34,492.2O USD\nSignature: /s/ Pinecrest Manager"
+ },
+ {
+  "id": "D-5062-invoice",
+  "kind": "invoice",
+  "text": "lNVOICE MES-3942\nFrom: Mesa Windows & Doors\nBill to: Seabright Residential\nDate: 2026-09-18\nWork: windows (budget line 'windows')\nAmount due: $37,96l.OO"
+ },
+ {
+  "id": "D-5062-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1062\nInspected on 2026-09-17 by third-party inspector\n- windows: 80% complete\n- hvac: 40% complete\n- framing: 40% complete"
+ },
+ {
+  "id": "D-5062-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Mesa Windows & Doors\nAmount of payment: 37,96l.OO USD\nSignature: /s/ Mesa Manager"
+ },
+ {
+  "id": "D-5063-invoice",
+  "kind": "invoice",
+  "text": "lNVOICE NOR-9380\nFrom: Northgate Electric\nBill to: Alder Street Homes LLC\nDate: Sep 14, 2026\nWork: electrical (budget line 'electrical')\nAmount due: USD 6O,482.5O"
+ },
+ {
+  "id": "D-5063-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1063\nInspected on 2026-09-13 by third-party inspector\n- electrical: 50% complete\n- roofing: 20% complete\n- framing: 60% complete"
+ },
+ {
+  "id": "D-5063-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Northgate Electric\nAmount of payment: $6O,482.5O\nSignature: /s/ Northgate Manager"
+ },
+ {
+  "id": "D-5064-invoice",
+  "kind": "invoice",
+  "text": "lNVOICE BAY-3601\nFrom: Bayline Framing\nBill to: Marigold Lane Partners\nDate: Sep 22, 2026\nWork: framing (budget line 'framing')\nAmount due: USD 56,573.8O"
+ },
+ {
+  "id": "D-5064-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1064\nInspected on Sep 21, 2026 by third-party inspector\n- framing: 70% complete\n- electrical: 60% complete\n- windows: 40% complete"
+ },
+ {
+  "id": "D-5064-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Bayline Framing\nAmount of payment: USD 56,573.8O\nSignature: /s/ Bayline Manager"
+ },
+ {
+  "id": "D-5065-invoice",
+  "kind": "invoice",
+  "text": "lNVOICE HAR-5557\nFrom: Harbor HVAC\nBill to: Oak Hollow Development\nDate: 2026-09-18\nWork: hvac (budget line 'hvac')\nAmount due: 7l,572.8O USD"
+ },
+ {
+  "id": "D-5065-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1065\nInspected on 2026-09-17 by third-party inspector\n- hvac: 80% complete\n- windows: 60% complete\n- roofing: 20% complete"
+ },
+ {
+  "id": "D-5065-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Harbor HVAC\nAmount of payment: 7l,572.8O USD\nSignature: /s/ Harbor Manager"
+ },
+ {
+  "id": "D-5066-invoice",
+  "kind": "invoice",
+  "text": "INVOICE No. MES - 7156\nFrom: Mesa Windows & Doors\nBill to: Oak Hollow Development\nDate: Sep 26, 2026\nWork: windows (budget line 'windows')\nAmount due: 93,050.90 USD"
+ },
+ {
+  "id": "D-5066-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1066\nInspected on 2026-09-25 by third-party inspector\n- windows: 70% complete\n- hvac: 40% complete\n- roofing: 20% complete"
+ },
+ {
+  "id": "D-5066-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Mesa Windows & Doors\nAmount of payment: USD 93,050.90\nSignature: /s/ Mesa Manager"
+ },
+ {
+  "id": "D-5067-invoice",
+  "kind": "invoice",
+  "text": "INVOICE No. PIN - 5767\nFrom: Pinecrest Drywall\nBill to: Marigold Lane Partners\nDate: Sep 17, 2026\nWork: drywall (budget line 'drywall')\nAmount due: 36,075.40 USD"
+ },
+ {
+  "id": "D-5067-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1067\nInspected on 2026-09-16 by third-party inspector\n- drywall: 60% complete\n- foundation: 20% complete\n- hvac: 40% complete"
+ },
+ {
+  "id": "D-5067-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Pinecrest Drywall\nAmount of payment: USD 36,075.40\nSignature: /s/ Pinecrest Manager"
+ },
+ {
+  "id": "D-5068-invoice",
+  "kind": "invoice",
+  "text": "INVOICE No. PIN - 5934\nFrom: Pinecrest Drywall\nBill to: Marigold Lane Partners\nDate: 2026-09-26\nWork: drywall (budget line 'drywall')\nAmount due: 20,751.80 USD"
+ },
+ {
+  "id": "D-5068-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1068\nInspected on 09/25/2026 by third-party inspector\n- drywall: 60% complete\n- windows: 40% complete\n- roofing: 20% complete"
+ },
+ {
+  "id": "D-5068-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Pinecrest Drywall\nAmount of payment: USD 20,751.80\nSignature: /s/ Pinecrest Manager"
+ },
+ {
+  "id": "D-5069-invoice",
+  "kind": "invoice",
+  "text": "INVOICE No. PIN - 5329\nFrom: Pinecrest Drywall\nBill to: Alder Street Homes LLC\nDate: 09/29/2026\nWork: drywall (budget line 'drywall')\nAmount due: 103,618.30 USD"
+ },
+ {
+  "id": "D-5069-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1069\nInspected on 09/28/2026 by third-party inspector\n- drywall: 70% complete\n- roofing: 60% complete\n- electrical: 60% complete"
+ },
+ {
+  "id": "D-5069-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Pinecrest Drywall\nAmount of payment: $ 103,618.30\nSignature: /s/ Pinecrest Manager"
+ },
+ {
+  "id": "D-5070-invoice",
+  "kind": "invoice",
+  "text": "INVOICE No. MES - 3608\nFrom: Mesa Windows & Doors\nBill to: Alder Street Homes LLC\nDate: 2026-09-27\nWork: windows (budget line 'windows')\nAmount due: USD 105,108.40"
+ },
+ {
+  "id": "D-5070-inspection",
+  "kind": "inspection",
+  "text": "SITE INSPECTION REPORT\nLoan L-1070\nInspected on 2026-09-26 by third-party inspector\n- windows: 60% complete\n- electrical: 40% complete\n- roofing: 20% complete"
+ },
+ {
+  "id": "D-5070-lien_waiver",
+  "kind": "lien_waiver",
+  "text": "CONDITIONAL LIEN WAIVER AND RELEASE ON PROGRESS PAYMENT\nClaimant: Mesa Windows & Doors\nAmount of payment: $ 105,108.40\nSignature: /s/ Mesa Manager"
  }
 ]
