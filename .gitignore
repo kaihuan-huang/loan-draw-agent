@@ -1,0 +1,42 @@
+# Deny by default: this repository tracks only the paths allowed below.
+# The workspace root may also hold company documents, spreadsheets, transcripts
+# and other repositories; none of those may ever be committed here.
+/*
+!/.gitignore
+!/README.md
+!/docs/
+!/intent/
+!/spec/
+!/scripts/
+!/ENGINEERING.md
+!/REVIEW.md
+!/LICENSE
+!/pyproject.toml
+!/uv.lock
+!/Dockerfile
+!/docker-compose.yml
+!/.dockerignore
+!/.github/
+!/src/
+!/tests/
+!/evals/
+!/data/
+!/deploy/
+
+# Never, even inside an allowed folder
+.env
+.env.*
+!.env.example
+*.pdf
+*.xlsx
+*.xls
+*.docx
+transcripts/
+.DS_Store
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.sqlite
+*.db
