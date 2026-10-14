@@ -1,0 +1,24 @@
+# Local stack: API, MCP server and Arize Phoenix for traces. The model is a vLLM server on a GPU host
+# (set LLM_API_BASE), or set LLM_CASSETTE=replay to answer from the recorded runs.
+services:
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      LLM_MODEL: ${LLM_MODEL:-hosted_vllm/Qwen/Qwen2.5-7B-Instruct}
+      LLM_API_BASE: ${LLM_API_BASE:-}
+      LLM_CASSETTE: ${LLM_CASSETTE:-}
+      MCP_URL: http://mcp:8765/mcp
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://phoenix:6006
+    volumes: [state:/state]
+    depends_on: [mcp, phoenix]
+  mcp:
+    build: .
+    command: ["python", "-m", "loan_draw.mcp_server"]
+    environment: {MCP_HOST: 0.0.0.0, MCP_ALLOWED_HOSTS: "mcp:8765"}
+    ports: ["127.0.0.1:8765:8765"]
+  phoenix:
+    image: arizephoenix/phoenix:version-20.21.4
+    ports: ["127.0.0.1:6006:6006"]
+volumes:
+  state: {}

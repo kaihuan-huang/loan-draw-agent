@@ -792,5 +792,325 @@
    "D-5050-inspection",
    "D-5050-lien_waiver"
   ]
+ },
+ {
+  "id": "D-5051",
+  "loan_id": "L-1051",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "foundation",
+    "amount_cents": 2795350
+   }
+  ],
+  "document_ids": [
+   "D-5051-invoice",
+   "D-5051-inspection",
+   "D-5051-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5052",
+  "loan_id": "L-1052",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "windows",
+    "amount_cents": 4964250
+   }
+  ],
+  "document_ids": [
+   "D-5052-invoice",
+   "D-5052-inspection",
+   "D-5052-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5053",
+  "loan_id": "L-1053",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "hvac",
+    "amount_cents": 3651220
+   }
+  ],
+  "document_ids": [
+   "D-5053-invoice",
+   "D-5053-inspection",
+   "D-5053-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5054",
+  "loan_id": "L-1054",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "electrical",
+    "amount_cents": 2561080
+   }
+  ],
+  "document_ids": [
+   "D-5054-invoice",
+   "D-5054-inspection",
+   "D-5054-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5055",
+  "loan_id": "L-1055",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "drywall",
+    "amount_cents": 6628400
+   }
+  ],
+  "document_ids": [
+   "D-5055-invoice",
+   "D-5055-inspection",
+   "D-5055-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5056",
+  "loan_id": "L-1056",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "electrical",
+    "amount_cents": 2960980
+   }
+  ],
+  "document_ids": [
+   "D-5056-invoice",
+   "D-5056-inspection",
+   "D-5056-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5057",
+  "loan_id": "L-1057",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "hvac",
+    "amount_cents": 3145010
+   }
+  ],
+  "document_ids": [
+   "D-5057-invoice",
+   "D-5057-inspection",
+   "D-5057-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5058",
+  "loan_id": "L-1058",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "electrical",
+    "amount_cents": 6576800
+   }
+  ],
+  "document_ids": [
+   "D-5058-invoice",
+   "D-5058-inspection",
+   "D-5058-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5059",
+  "loan_id": "L-1059",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "plumbing",
+    "amount_cents": 7451540
+   }
+  ],
+  "document_ids": [
+   "D-5059-invoice",
+   "D-5059-inspection",
+   "D-5059-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5060",
+  "loan_id": "L-1060",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "foundation",
+    "amount_cents": 7036000
+   }
+  ],
+  "document_ids": [
+   "D-5060-invoice",
+   "D-5060-inspection",
+   "D-5060-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5061",
+  "loan_id": "L-1061",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "drywall",
+    "amount_cents": 3449220
+   }
+  ],
+  "document_ids": [
+   "D-5061-invoice",
+   "D-5061-inspection",
+   "D-5061-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5062",
+  "loan_id": "L-1062",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "windows",
+    "amount_cents": 3796100
+   }
+  ],
+  "document_ids": [
+   "D-5062-invoice",
+   "D-5062-inspection",
+   "D-5062-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5063",
+  "loan_id": "L-1063",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "electrical",
+    "amount_cents": 6048250
+   }
+  ],
+  "document_ids": [
+   "D-5063-invoice",
+   "D-5063-inspection",
+   "D-5063-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5064",
+  "loan_id": "L-1064",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "framing",
+    "amount_cents": 5657380
+   }
+  ],
+  "document_ids": [
+   "D-5064-invoice",
+   "D-5064-inspection",
+   "D-5064-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5065",
+  "loan_id": "L-1065",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "hvac",
+    "amount_cents": 7157280
+   }
+  ],
+  "document_ids": [
+   "D-5065-invoice",
+   "D-5065-inspection",
+   "D-5065-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5066",
+  "loan_id": "L-1066",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "windows",
+    "amount_cents": 9305090
+   }
+  ],
+  "document_ids": [
+   "D-5066-invoice",
+   "D-5066-inspection",
+   "D-5066-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5067",
+  "loan_id": "L-1067",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "drywall",
+    "amount_cents": 3607540
+   }
+  ],
+  "document_ids": [
+   "D-5067-invoice",
+   "D-5067-inspection",
+   "D-5067-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5068",
+  "loan_id": "L-1068",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "drywall",
+    "amount_cents": 2075180
+   }
+  ],
+  "document_ids": [
+   "D-5068-invoice",
+   "D-5068-inspection",
+   "D-5068-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5069",
+  "loan_id": "L-1069",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "drywall",
+    "amount_cents": 10361830
+   }
+  ],
+  "document_ids": [
+   "D-5069-invoice",
+   "D-5069-inspection",
+   "D-5069-lien_waiver"
+  ]
+ },
+ {
+  "id": "D-5070",
+  "loan_id": "L-1070",
+  "submitted_on": "2026-10-01",
+  "lines": [
+   {
+    "line": "windows",
+    "amount_cents": 10510840
+   }
+  ],
+  "document_ids": [
+   "D-5070-invoice",
+   "D-5070-inspection",
+   "D-5070-lien_waiver"
+  ]
  }
 ]

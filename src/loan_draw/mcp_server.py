@@ -59,7 +59,10 @@ if __name__ == "__main__":
     import asyncio
 
     import uvicorn
+    from mcp.server.transport_security import TransportSecuritySettings
 
-    app = server.streamable_http_app()
+    # DNS-rebinding protection stays on; MCP_ALLOWED_HOSTS names the in-cluster or compose host (e.g. "loan-draw-mcp:8765")
+    hosts = ["127.0.0.1:*", "localhost:*", *[h for h in os.environ.get("MCP_ALLOWED_HOSTS", "").split(",") if h]]
+    app = server.streamable_http_app(transport_security=TransportSecuritySettings(allowed_hosts=hosts))
     asyncio.run(uvicorn.Server(uvicorn.Config(app, host=os.environ.get("MCP_HOST", "127.0.0.1"),
                                               port=int(os.environ.get("MCP_PORT", "8765")))).serve())
