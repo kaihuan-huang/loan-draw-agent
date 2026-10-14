@@ -15,7 +15,7 @@ services:
   mcp:
     build: .
     command: ["python", "-m", "loan_draw.mcp_server"]
-    environment: {MCP_HOST: 0.0.0.0}
+    environment: {MCP_HOST: 0.0.0.0, MCP_ALLOWED_HOSTS: "mcp:8765"}
     ports: ["127.0.0.1:8765:8765"]
   phoenix:
     image: arizephoenix/phoenix:version-20.21.4

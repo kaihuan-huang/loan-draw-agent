@@ -69,9 +69,11 @@ def create_app(llm=None, ledger: Ledger | None = None, checkpoint_db: str | None
         c = cfg(draw_id)
         g = app.state.graph
         snap = await g.aget_state(c)
-        if snap.values or app.state.ledger.decision(draw_id):
-            return _view(draw_id, snap, app.state.ledger)
-        await g.ainvoke({"draw_id": draw_id}, c)
+        view = _view(draw_id, snap, app.state.ledger)
+        if view["status"] in ("decided", "waiting_for_officer"):
+            return view
+        # never started -> start; crashed mid-way (checkpoint with a next step, no question pending) -> resume there
+        await g.ainvoke(None if snap.next else {"draw_id": draw_id}, c)
         return _view(draw_id, await g.aget_state(c), app.state.ledger)
 
     @app.get("/reviews/{draw_id}")

@@ -13,7 +13,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["python", "-m", "loan_draw.mcp_server"]
-          env: [{name: MCP_HOST, value: "0.0.0.0"}]
+          env: [{name: MCP_HOST, value: "0.0.0.0"}, {name: MCP_ALLOWED_HOSTS, value: "{{ .Release.Name }}-mcp:8765"}]
           ports: [{containerPort: 8765}]
           readinessProbe: {tcpSocket: {port: 8765}, periodSeconds: 5}
           resources: {{- toYaml .Values.mcp.resources | nindent 12 }}
