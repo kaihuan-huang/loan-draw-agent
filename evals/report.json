@@ -12,7 +12,7 @@
   "notes_claiming_outcome": 0,
   "notes_citing_other_clauses": 0,
   "judge_unparsed": 0,
-  "seconds_total": 0.5,
+  "seconds_total": 0.6,
   "model": "hosted_vllm/Qwen/Qwen2.5-7B-Instruct",
   "field_misses": {
    "miss.inspection.percent_complete": 1

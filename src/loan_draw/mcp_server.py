@@ -59,7 +59,6 @@ if __name__ == "__main__":
     import asyncio
 
     import uvicorn
-
     from mcp.server.transport_security import TransportSecuritySettings
 
     # DNS-rebinding protection stays on; MCP_ALLOWED_HOSTS names the in-cluster or compose host (e.g. "loan-draw-mcp:8765")
