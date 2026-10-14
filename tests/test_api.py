@@ -41,3 +41,28 @@ def test_bad_input():
         draw_id = case("clean")["draw_id"]
         c.post(f"/reviews/{draw_id}")
         assert c.post(f"/reviews/{draw_id}/decision", json={"officer": "a", "action": "yes"}).status_code == 422
+
+
+class FlakyLLM(TruthLLM):
+    """Fails the first extraction call, like a model server that is briefly down."""
+
+    def __init__(self):
+        super().__init__()
+        self.failed = False
+
+    def json(self, task, messages, schema):
+        if not self.failed:
+            self.failed = True
+            raise RuntimeError("model server unavailable")
+        return super().json(task, messages, schema)
+
+
+# Found on the kind cluster (2026-10-14): a review that crashed mid-way kept its checkpoint, and a second start only
+# reported "running" forever.
+def test_start_resumes_a_review_that_failed_mid_way(tmp_path):
+    draw_id = case("clean")["draw_id"]
+    with TestClient(create_app(llm=FlakyLLM(), ledger=Ledger(), checkpoint_db=str(tmp_path / "cp.db")),
+                    raise_server_exceptions=False) as c:
+        assert c.post(f"/reviews/{draw_id}").status_code == 500
+        r = c.post(f"/reviews/{draw_id}").json()
+        assert r["status"] == "waiting_for_officer"
