@@ -12,6 +12,7 @@
 !/REVIEW.md
 !/LICENSE
 !/pyproject.toml
+!/langgraph.json
 !/uv.lock
 !/Dockerfile
 !/docker-compose.yml
