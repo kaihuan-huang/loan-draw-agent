@@ -35,6 +35,9 @@ dev = [
     "pytest-asyncio>=1.4.0",
     "ruff>=0.17.0",
 ]
+inbox = [
+    "langgraph-cli[inmem]>=0.4.40",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -58,7 +58,7 @@ Serving on the GB10 (bf16, `--gpu-memory-utilization 0.3`, 17 GiB KV cache): one
 
 ```sh
 uv sync
-uv run pytest -q                                          # 111 tests
+uv run pytest -q                                          # 127 tests
 LLM_CASSETTE=replay uv run python evals/run.py            # evals from the recordings
 uv run python -m loan_draw.seed                           # regenerate the synthetic data
 
@@ -76,6 +76,25 @@ curl -X POST localhost:8080/reviews/D-5003
 
 API: `POST /reviews/{draw_id}` (start or resume; idempotent), `GET /reviews/{draw_id}`,
 `POST /reviews/{draw_id}/decision` with `{"officer": "...", "action": "approve" | "reject"}`, `GET /ledger/verify`.
+
+### Officer review in the Agent Inbox (optional)
+
+Officers can review in LangChain's open-source [Agent Inbox](https://github.com/langchain-ai/agent-inbox) instead of
+calling the API. `loan_draw/inbox.py` only translates: the same review payload becomes a `HumanInterrupt`, and the
+inbox's answer becomes the same `{officer, action}`, checked by the same graph step. Design and known gaps:
+`spec/agent-inbox.md` (draft, awaiting product owner sign-off).
+
+```sh
+uv sync --group inbox
+LLM_CASSETTE=replay LLM_CASSETTE_PATH=evals/cassettes/qwen2.5-7b.jsonl \
+  uv run langgraph dev --no-browser --allow-blocking        # prints the API URL (default http://127.0.0.1:2024)
+uv run python scripts/inbox_start.py                        # start reviews; waiting draws appear in the inbox
+```
+
+Then open the Agent Inbox (hosted at dev.agentinbox.ai, or run it locally), add an inbox with graph id `loan_draw` and
+the API URL. The officer edits two fields, `officer` and `decision` (`approve` or `reject`). Running the inbox locally
+from commit `f1616f3` needs `docs/agent-inbox-react-markdown-10.patch` (the thread view crashes without it). If anyone
+uses the inbox's "Mark as Resolved", run `scripts/inbox_start.py` again: it puts that draw back for review.
 
 ## Limits
 
