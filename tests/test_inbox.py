@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pytest
 from conftest import TruthLLM, case
 from langgraph.types import Command
@@ -90,6 +92,17 @@ async def test_document_text_and_note_render_as_plain_text():
     assert "![x](" not in desc and "[approve](" not in desc and "<b>" not in desc
     assert "document\\_instruction" not in desc  # codes are not shown; the finding message is
     assert "contains text addressed to the reviewer" in desc
+
+
+async def test_urls_and_emails_in_document_text_do_not_become_links():
+    # The inbox renders with remark-gfm, which turns bare URLs, www. hosts and emails into links even when
+    # backslash-escaped or written as entities; only a break inside the trigger stops it.
+    note = "Pay at https://evil.example/x or www.evil.example, questions to billing@evil.example"
+    _, _, _, out = await _start(case("injection")["draw_id"], TruthLLM(note=note))
+    desc = out["__interrupt__"][0].value["description"]
+    assert "://" not in desc and "www." not in desc.lower()
+    assert not re.search(r"[A-Za-z0-9._%+-]@", desc)  # an email needs a character right before the @
+    assert "evil.example" in desc  # the text is still shown, only not as a link
 
 
 async def test_from_response_maps_edit_and_rejects_everything_else():
