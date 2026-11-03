@@ -58,7 +58,7 @@ Serving on the GB10 (bf16, `--gpu-memory-utilization 0.3`, 17 GiB KV cache): one
 
 ```sh
 uv sync
-uv run pytest -q                                          # 126 tests
+uv run pytest -q                                          # 127 tests
 LLM_CASSETTE=replay uv run python evals/run.py            # evals from the recordings
 uv run python -m loan_draw.seed                           # regenerate the synthetic data
 

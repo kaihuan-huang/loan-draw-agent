@@ -22,11 +22,19 @@ ACTION = "decide_draw"
 PLACEHOLDER = "approve or reject"
 
 _MD = re.compile(r"([\\`*_{}\[\]()<>#+!|~])")
+# GFM autolinks bare URLs, www. hosts and emails even through backslash escapes and HTML entities (checked against
+# the inbox's react-markdown 10 + remark-gfm). A word joiner (U+2060, invisible, no width) inside each trigger stops
+# the match without changing what the officer reads. Display only: the ledger and the payload keep the original text.
+_WJ = "⁠"
+_AUTOLINK = [(re.compile(r":(?=//)"), ":" + _WJ), (re.compile(r"(?i)(www)\."), r"\1" + _WJ + "."), (re.compile("@"), _WJ + "@")]
 
 
 def _md(text: Any) -> str:
-    """Escape Markdown so document-derived text (vendor names, the model's note) renders as plain text."""
-    return _MD.sub(r"\\\1", str(text)).replace("\n", " ")
+    """Escape Markdown so document-derived text (vendor names, the model's note) renders as plain text, not links."""
+    s = _MD.sub(r"\\\1", str(text)).replace("\n", " ")
+    for pattern, repl in _AUTOLINK:
+        s = pattern.sub(repl, s)
+    return s
 
 
 def describe(p: dict) -> str:

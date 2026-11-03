@@ -36,6 +36,9 @@ From: `intent/agent-inbox.md` (draft, not yet accepted). Author: Kaihuan Huang, 
      leaves the inbox. Observed on D-5051. Mitigation: `scripts/inbox_start.py` reviews it again (observed: back to
      waiting). No money can move this way.
   3. The inbox's Markdown component enables `rehype-raw`; escaping is therefore required, and tested.
+     remark-gfm also autolinks bare URLs, `www.` hosts and emails, and backslash escapes or HTML entities do not
+     stop it; `_md` inserts a word joiner (U+2060) inside `://`, `www.` and `@` (display only). Checked against the
+     inbox's own react-markdown 10 + remark-gfm + rehype-raw.
   4. agent-inbox `f1616f3` with react-markdown 10 crashes when a thread is opened (`className` prop removed).
      `docs/agent-inbox-react-markdown-10.patch` is the local fix used for verification.
   5. `langgraph dev` needs `--allow-blocking`: the ledger (SQLite) and the in-process MCP server read synchronously
