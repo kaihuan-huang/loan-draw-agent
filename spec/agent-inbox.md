@@ -26,7 +26,9 @@ From: `intent/agent-inbox.md` (draft, not yet accepted). Author: Kaihuan Huang, 
 ## Security & compliance check
 - **PII**: none; synthetic data. Descriptions carry vendor names and amounts already shown to officers by the API.
 - **Money / state**: approval still needs the explicit approve and the two-person rule (tests in `tests/test_inbox.py`).
-  The ledger write is unchanged (`record`, one decision per draw).
+  The ledger write is unchanged (`record`, one decision per draw). The API and `inbox_server.py` take the ledger path
+  from one function, `ledger.ledger_path()` (env `LEDGER_DB`, default `ledger.db`), so both write the same ledger;
+  with different paths one draw could get a decision in each (test in `tests/test_api.py`).
 - **§6**: the rule text changes from "through `/reviews/{id}/decision`" to "through `/reviews/{id}/decision` or the
   Agent Inbox entry point, both answered by `graph.officer_review`".
 - **Feature flag**: off by default. Nothing runs unless the LangGraph server entry point is started.
@@ -34,7 +36,12 @@ From: `intent/agent-inbox.md` (draft, not yet accepted). Author: Kaihuan Huang, 
   1. Officer identity is typed text, as in the API path. Production needs authenticated identity.
   2. "Mark as Resolved" calls `threads.updateState(asNode: END)`: the thread ends, no ledger row is written, the draw
      leaves the inbox. Observed on D-5051. Mitigation: `scripts/inbox_start.py` reviews it again (observed: back to
-     waiting). No money can move this way.
+     waiting). No money can move this way. The reopened thread keeps its checkpoint, so approvals given before
+     "Mark as Resolved" still count toward the two-person rule; reopening does not clear them (intended, not changed).
+  2a. `scripts/inbox_start.py` is for a single operator: its check (is the thread waiting or decided?) and its run are
+     not atomic, so two copies started at once on the same draw could both start a run. Money is not at risk: the
+     ledger's unique index allows one decision per draw. A per-draw lock was left out as more machinery than one
+     operator needs; add one if several people run the script.
   3. The inbox's Markdown component enables `rehype-raw`; escaping is therefore required, and tested.
      remark-gfm also autolinks bare URLs, `www.` hosts and emails, and backslash escapes or HTML entities do not
      stop it; `_md` inserts a word joiner (U+2060) inside `://`, `www.` and `@` (display only). Checked against the

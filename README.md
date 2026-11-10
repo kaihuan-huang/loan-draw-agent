@@ -58,7 +58,7 @@ Serving on the GB10 (bf16, `--gpu-memory-utilization 0.3`, 17 GiB KV cache): one
 
 ```sh
 uv sync
-uv run pytest -q                                          # 127 tests
+uv run pytest -q                                          # 128 tests
 LLM_CASSETTE=replay uv run python evals/run.py            # evals from the recordings
 uv run python -m loan_draw.seed                           # regenerate the synthetic data
 
@@ -76,6 +76,10 @@ curl -X POST localhost:8080/reviews/D-5003
 
 API: `POST /reviews/{draw_id}` (start or resume; idempotent), `GET /reviews/{draw_id}`,
 `POST /reviews/{draw_id}/decision` with `{"officer": "...", "action": "approve" | "reject"}`, `GET /ledger/verify`.
+
+Ledger location: the API and the Agent Inbox entry point both read `LEDGER_DB` (default `ledger.db` in the working
+directory; the Docker image sets `/state/ledger.db`), so one draw gets one decision whichever way it is reviewed.
+Run both against the same file. Tests pass `Ledger()` (in memory) directly.
 
 ### Officer review in the Agent Inbox (optional)
 

@@ -4,11 +4,9 @@ Kept apart from `inbox.py` so importing the adapter (tests, other code) opens no
 """
 from __future__ import annotations
 
-import os
-
 from loan_draw import inbox
 from loan_draw.graph import build
-from loan_draw.ledger import Ledger
+from loan_draw.ledger import Ledger, ledger_path
 from loan_draw.llm import Gateway
 
-graph = build(Gateway(), Ledger(os.environ.get("LEDGER_DB", "inbox-ledger.db")), ask=inbox.ask, standalone=False)
+graph = build(Gateway(), Ledger(ledger_path()), ask=inbox.ask, standalone=False)

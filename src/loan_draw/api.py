@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from loan_draw import data, telemetry
 from loan_draw.graph import build
-from loan_draw.ledger import Ledger
+from loan_draw.ledger import Ledger, ledger_path
 from loan_draw.llm import Gateway
 
 
@@ -42,7 +42,7 @@ def create_app(llm=None, ledger: Ledger | None = None, checkpoint_db: str | None
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         telemetry.setup()
-        app.state.ledger = ledger or Ledger(os.environ.get("LEDGER_DB", ":memory:"))
+        app.state.ledger = ledger or Ledger(ledger_path())
         db = checkpoint_db or os.environ.get("CHECKPOINT_DB")
         if db:
             from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
