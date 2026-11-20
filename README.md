@@ -85,7 +85,9 @@ Each caller has its own key, set in `LOAN_DRAW_API_KEYS` as comma-separated `nam
 written to the ledger is the name on the key; a name in the request body is ignored, so one officer cannot fill both
 approvals of a draw over $100,000. `officer` keys can approve or reject; `agent` keys (the review service, scripts)
 can start and read reviews and get 403 on a decision. With no keys set, every route but `/health` answers 401. A
-malformed entry, a key shorter than 16 characters or a key shared by two entries stops start-up.
+malformed entry, a key shorter than 16 characters, a key shared by two entries or one name on two keys stops
+start-up. Names are case-insensitive (`Officer-A` and `officer-a` are the same person). The key is everything after the
+second `:`, so it may itself contain `:`. `/docs`, `/redoc` and `/openapi.json` are off; set `LOAN_DRAW_DOCS=1` to serve them.
 
 Local keys for a demo (keep them out of git; `.env` is ignored):
 

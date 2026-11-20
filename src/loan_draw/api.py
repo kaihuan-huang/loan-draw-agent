@@ -77,7 +77,10 @@ def create_app(llm=None, ledger: Ledger | None = None, checkpoint_db: str | None
             app.state.graph = build(llm or Gateway(), app.state.ledger)
             yield
 
-    app = FastAPI(title="Loan Draw Review Agent", lifespan=lifespan)
+    docs = os.environ.get("LOAN_DRAW_DOCS", "").strip().lower() in ("1", "true", "yes")
+    app = FastAPI(title="Loan Draw Review Agent", lifespan=lifespan,
+                  docs_url="/docs" if docs else None, redoc_url="/redoc" if docs else None,
+                  openapi_url="/openapi.json" if docs else None)
     app.state.keys = Keys(os.environ.get("LOAN_DRAW_API_KEYS", "") if api_keys is None else api_keys)
 
     def cfg(draw_id: str) -> dict:
