@@ -58,7 +58,7 @@ Serving on the GB10 (bf16, `--gpu-memory-utilization 0.3`, 17 GiB KV cache): one
 
 ```sh
 uv sync
-uv run pytest -q                                          # 111 tests
+uv run pytest -q                                          # 123 tests
 LLM_CASSETTE=replay uv run python evals/run.py            # evals from the recordings
 uv run python -m loan_draw.seed                           # regenerate the synthetic data
 
@@ -70,12 +70,40 @@ LLM_API_BASE=http://localhost:8100/v1 uv run uvicorn loan_draw.api:app --port 80
 docker build -t loan-draw-agent:dev .
 kind create cluster --name loan-draw --config deploy/kind.yaml
 kind load docker-image loan-draw-agent:dev --name loan-draw
+kubectl create secret generic loan-draw-api-keys --from-literal=LOAN_DRAW_API_KEYS="$LOAN_DRAW_API_KEYS"
 helm install loan-draw deploy/helm/loan-draw
-curl -X POST localhost:8080/reviews/D-5003
+curl -X POST -H "Authorization: Bearer $OFFICER_A_KEY" localhost:8080/reviews/D-5003
 ```
 
 API: `POST /reviews/{draw_id}` (start or resume; idempotent), `GET /reviews/{draw_id}`,
-`POST /reviews/{draw_id}/decision` with `{"officer": "...", "action": "approve" | "reject"}`, `GET /ledger/verify`.
+`POST /reviews/{draw_id}/decision` with `{"action": "approve" | "reject"}`, `GET /ledger/verify`. Every route except
+`GET /health` needs `Authorization: Bearer <key>`.
+
+## API keys
+
+Each caller has its own key, set in `LOAN_DRAW_API_KEYS` as comma-separated `name:role:key` entries. The approver
+written to the ledger is the name on the key; a name in the request body is ignored, so one officer cannot fill both
+approvals of a draw over $100,000. `officer` keys can approve or reject; `agent` keys (the review service, scripts)
+can start and read reviews and get 403 on a decision. With no keys set, every route but `/health` answers 401. A
+malformed entry, a key shorter than 16 characters, a key shared by two entries or one name on two keys stops
+start-up. Names are case-insensitive (`Officer-A` and `officer-a` are the same person). The key is everything after the
+second `:`, so it may itself contain `:`. `/docs`, `/redoc` and `/openapi.json` are off; set `LOAN_DRAW_DOCS=1` to serve them.
+
+Local keys for a demo (keep them out of git; `.env` is ignored):
+
+```sh
+key() { python3 -c "import secrets; print(secrets.token_urlsafe(32))"; }
+export OFFICER_A_KEY=$(key) OFFICER_B_KEY=$(key) BOT_KEY=$(key)
+export LOAN_DRAW_API_KEYS="officer-a:officer:$OFFICER_A_KEY,officer-b:officer:$OFFICER_B_KEY,review-bot:agent:$BOT_KEY"
+uv run uvicorn loan_draw.api:app --port 8000
+
+curl -X POST -H "Authorization: Bearer $BOT_KEY" localhost:8000/reviews/D-5003
+curl -X POST -H "Authorization: Bearer $OFFICER_A_KEY" -H "Content-Type: application/json" \
+     -d '{"action": "approve"}' localhost:8000/reviews/D-5003/decision
+```
+
+Keys are compared in constant time against a SHA-256 of each configured key. They are a prototype mechanism: a real
+deployment would put an identity provider (OIDC) in front and map its claims to the same two roles.
 
 ## Limits
 

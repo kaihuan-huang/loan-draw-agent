@@ -8,6 +8,7 @@ services:
       LLM_MODEL: ${LLM_MODEL:-hosted_vllm/Qwen/Qwen2.5-7B-Instruct}
       LLM_API_BASE: ${LLM_API_BASE:-}
       LLM_CASSETTE: ${LLM_CASSETTE:-}
+      LOAN_DRAW_API_KEYS: ${LOAN_DRAW_API_KEYS:-}   # name:role:key,... see README "API keys"
       MCP_URL: http://mcp:8765/mcp
       OTEL_EXPORTER_OTLP_ENDPOINT: http://phoenix:6006
     volumes: [state:/state]
