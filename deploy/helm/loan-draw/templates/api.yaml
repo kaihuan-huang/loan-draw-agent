@@ -26,6 +26,8 @@ spec:
             - {name: LLM_API_BASE, value: {{ .Values.llm.apiBase | quote }}}
             - {name: LLM_CASSETTE, value: {{ .Values.llm.cassette | quote }}}
             - {name: LLM_CASSETTE_PATH, value: /app/evals/cassettes/qwen2.5-7b.jsonl}
+            - name: LOAN_DRAW_API_KEYS
+              valueFrom: {secretKeyRef: {name: {{ .Release.Name }}-api-keys, key: LOAN_DRAW_API_KEYS, optional: true}}
           ports: [{containerPort: 8000}]
           readinessProbe: {httpGet: {path: /health, port: 8000}, periodSeconds: 5}
           livenessProbe: {httpGet: {path: /health, port: 8000}, periodSeconds: 20}
