@@ -4,12 +4,19 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import sqlite3
 import threading
 from datetime import UTC, datetime
 from pathlib import Path
 
 GENESIS = "0" * 64
+DEFAULT_LEDGER_DB = "ledger.db"
+
+
+def ledger_path() -> str:
+    """The one place the ledger location is decided (env LEDGER_DB), so every entry point shares one ledger."""
+    return os.environ.get("LEDGER_DB", DEFAULT_LEDGER_DB)
 
 
 class TamperedLedger(RuntimeError):

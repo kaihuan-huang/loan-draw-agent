@@ -56,7 +56,14 @@ async def _tool(client: Client, name: str, args: dict) -> Any:
     return json.loads(r.content[0].text)
 
 
-def build(llm: LLM, ledger: Ledger, checkpointer=None):
+def build(llm: LLM, ledger: Ledger, checkpointer=None, ask=interrupt, standalone: bool = True):
+    """Compile the review graph.
+
+    ask: how the officer is asked. The default is LangGraph's `interrupt` with the plain payload (the FastAPI path);
+    `loan_draw.inbox.ask` wraps the same payload for the Agent Inbox and maps its answer back to {officer, action}.
+    Either way the answer goes through the same checks below.
+    standalone=False compiles without a checkpointer, for a LangGraph server that brings its own.
+    """
     async def load(s: State) -> State:
         with span("load", draw_id=s["draw_id"]):
             async with Client(_mcp_target()) as c:
@@ -92,7 +99,7 @@ def build(llm: LLM, ledger: Ledger, checkpointer=None):
     def officer_review(s: State) -> Command:
         need = policy.approvers_needed(DrawRequest.model_validate(s["draw"]))
         approvals = list(s.get("approvals", []))
-        answer = interrupt({"draw_id": s["draw_id"], "route": s["route"], "findings": s["findings"],
+        answer = ask({"draw_id": s["draw_id"], "route": s["route"], "findings": s["findings"],
                             "note": s["note"], "approvers_needed": need, "approved_by": approvals})
         officer = str(answer.get("officer", "")).strip()
         action = answer.get("action")
@@ -124,4 +131,4 @@ def build(llm: LLM, ledger: Ledger, checkpointer=None):
     g.add_conditional_edges("explain", lambda s: "record" if s["route"] == "hold" else "officer_review",
                             ["record", "officer_review"])
     g.add_edge("record", END)
-    return g.compile(checkpointer=checkpointer or InMemorySaver())
+    return g.compile(checkpointer=(checkpointer or InMemorySaver()) if standalone else None)
