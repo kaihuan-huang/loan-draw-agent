@@ -70,7 +70,7 @@ LLM_API_BASE=http://localhost:8100/v1 uv run uvicorn loan_draw.api:app --port 80
 docker build -t loan-draw-agent:dev .
 kind create cluster --name loan-draw --config deploy/kind.yaml
 kind load docker-image loan-draw-agent:dev --name loan-draw
-helm install loan-draw deploy/helm/loan-draw
+helm install loan-draw deploy/helm/loan-draw --set api.serviceType=NodePort   # kind maps node port 30080 to 127.0.0.1:8080
 curl -X POST localhost:8080/reviews/D-5003
 ```
 
