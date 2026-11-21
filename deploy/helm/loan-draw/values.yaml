@@ -7,7 +7,8 @@ llm:
   apiBase: ""          # e.g. http://<gpu-host>:8100/v1; empty + cassette "replay" runs from recordings
   cassette: replay
 api:
-  nodePort: 30080
+  serviceType: ClusterIP   # in-cluster only; the local kind cluster sets NodePort (README)
+  nodePort: 30080          # used only when serviceType is NodePort
   resources: {requests: {cpu: 100m, memory: 256Mi}, limits: {memory: 512Mi}}
 mcp:
   resources: {requests: {cpu: 50m, memory: 128Mi}, limits: {memory: 256Mi}}
