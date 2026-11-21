@@ -21,7 +21,7 @@ load (MCP) -> extract (model) -> check (rules P1-P9) -> explain (model) -> hold 
   is replaced by a fixed template.
 - **Hash-chained ledger**: one decision per draw, enforced by the database; editing any row breaks `verify()`.
 - **Model serving**: Qwen2.5-7B-Instruct on vLLM (NVIDIA container) on a DGX Spark (GB10), behind a LiteLLM gateway
-  with ordered fallbacks and record/replay of every model call.
+  with ordered fallbacks (off unless `LLM_ALLOW_EXTERNAL=1`) and record/replay of every model call.
 - **Tracing**: OpenTelemetry spans per step; Arize Phoenix in the compose stack.
 - **Deploy**: Dockerfile, docker compose, Helm chart (API + MCP server, persistent volume), local kind cluster.
 
