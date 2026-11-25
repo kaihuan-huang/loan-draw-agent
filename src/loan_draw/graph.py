@@ -41,6 +41,11 @@ class State(TypedDict, total=False):
     outcome: str
 
 
+class RunInput(TypedDict):
+    """The only thing a caller may supply. `outcome` and `approvals` are written by the graph, never read from input."""
+    draw_id: str
+
+
 def _mcp_target():
     from loan_draw.mcp_server import server
     return os.environ.get("MCP_URL") or server
@@ -114,13 +119,13 @@ def build(llm: LLM, ledger: Ledger, checkpointer=None, ask=interrupt, standalone
         return Command(goto="officer_review", update={"approvals": approvals})
 
     def record(s: State) -> State:
-        outcome = s.get("outcome") or ("on_hold" if s["route"] == "hold" else "unknown")
+        outcome = "on_hold" if s["route"] == "hold" else (s.get("outcome") or "unknown")
         if ledger.decision(s["draw_id"]) is None:
             ledger.append(s["draw_id"], outcome, {"findings": [f["code"] for f in s["findings"]],
                                                    "approvals": s.get("approvals", []), "route": s["route"]})
         return {"outcome": outcome}
 
-    g = StateGraph(State)
+    g = StateGraph(State, input_schema=RunInput)
     for name, fn in [("load", load), ("extract", extract), ("check", check), ("explain", explain),
                      ("officer_review", officer_review), ("record", record)]:
         g.add_node(name, fn)
