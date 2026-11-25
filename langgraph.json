@@ -1,0 +1,5 @@
+{
+  "dependencies": ["."],
+  "graphs": { "loan_draw": "./src/loan_draw/inbox_server.py:graph" },
+  "auth": { "path": "./src/loan_draw/inbox_auth.py:auth" }
+}

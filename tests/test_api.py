@@ -69,3 +69,17 @@ def test_start_resumes_a_review_that_failed_mid_way(tmp_path):
         assert c.post(f"/reviews/{draw_id}").status_code == 500
         r = c.post(f"/reviews/{draw_id}").json()
         assert r["status"] == "waiting_for_officer"
+
+
+def test_api_and_inbox_server_default_to_the_same_ledger_file(tmp_path, monkeypatch):
+    """One ledger decision per draw holds only if both entry points open the same ledger when LEDGER_DB is unset."""
+    import importlib
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("LEDGER_DB", raising=False)
+    monkeypatch.delenv("CHECKPOINT_DB", raising=False)
+    with TestClient(create_app(llm=TruthLLM())):
+        pass
+    from loan_draw import inbox_server
+    importlib.reload(inbox_server)
+    assert sorted(p.name for p in tmp_path.glob("*.db")) == ["ledger.db"]

@@ -58,7 +58,7 @@ Serving on the GB10 (bf16, `--gpu-memory-utilization 0.3`, 17 GiB KV cache): one
 
 ```sh
 uv sync
-uv run pytest -q                                          # 123 tests
+uv run pytest -q                                          # 166 tests
 LLM_CASSETTE=replay uv run python evals/run.py            # evals from the recordings
 uv run python -m loan_draw.seed                           # regenerate the synthetic data
 
@@ -104,6 +104,31 @@ curl -X POST -H "Authorization: Bearer $OFFICER_A_KEY" -H "Content-Type: applica
 
 Keys are compared in constant time against a SHA-256 of each configured key. They are a prototype mechanism: a real
 deployment would put an identity provider (OIDC) in front and map its claims to the same two roles.
+
+Ledger location: the API and the Agent Inbox entry point both read `LEDGER_DB` (default `ledger.db` in the working
+directory; the Docker image sets `/state/ledger.db`), so one draw gets one decision whichever way it is reviewed.
+Run both against the same file. Tests pass `Ledger()` (in memory) directly.
+
+### Officer review in the Agent Inbox (optional)
+
+Officers can review in LangChain's open-source [Agent Inbox](https://github.com/langchain-ai/agent-inbox) instead of
+calling the API. `loan_draw/inbox.py` only translates: the same review payload becomes a `HumanInterrupt`, and the
+inbox's answer becomes the same `{officer, action}`, checked by the same graph step. The LangGraph server uses the
+same keys as the API: every request needs a key from `LOAN_DRAW_API_KEYS`, and the approver is the key holder. Design and known gaps:
+`spec/agent-inbox.md` (draft, awaiting product owner sign-off).
+
+```sh
+uv sync --group inbox
+LLM_CASSETTE=replay LLM_CASSETTE_PATH=evals/cassettes/qwen2.5-7b.jsonl \
+  uv run langgraph dev --no-browser --allow-blocking        # same LOAN_DRAW_API_KEYS as the API; prints the URL
+LOAN_DRAW_KEY=$BOT_KEY uv run python scripts/inbox_start.py   # start reviews with an agent key
+```
+
+Then open the Agent Inbox (hosted at dev.agentinbox.ai, or run it locally), add an inbox with graph id `loan_draw` and
+the API URL, and put the officer's own key in the inbox settings (the field labelled "LangSmith API Key"; the inbox
+sends it as `x-api-key`). The officer edits one field, `decision` (`approve` or `reject`). Running the inbox locally
+from commit `f1616f3` needs `docs/agent-inbox-react-markdown-10.patch` (the thread view crashes without it). If anyone
+uses the inbox's "Mark as Resolved", run `scripts/inbox_start.py` again: it puts that draw back for review.
 
 ## Limits
 

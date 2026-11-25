@@ -1,0 +1,23 @@
+diff --git a/src/components/ui/markdown-text.tsx b/src/components/ui/markdown-text.tsx
+index 903ec73..c3786df 100644
+--- a/src/components/ui/markdown-text.tsx
++++ b/src/components/ui/markdown-text.tsx
+@@ -7,8 +7,10 @@ export interface MarkdownTextProps extends Options {
+   className?: string;
+ }
+ 
+-export function MarkdownText({ children, ...props }: MarkdownTextProps) {
++export function MarkdownText({ children, className, ...props }: MarkdownTextProps) {
++  // react-markdown 10 removed the className prop: put it on a wrapper instead
+   return (
++    <div className={className}>
+     <Markdown
+       remarkPlugins={[remarkGfm]}
+       rehypePlugins={[rehypeRaw]}
+@@ -97,5 +99,6 @@ export function MarkdownText({ children, ...props }: MarkdownTextProps) {
+     >
+       {children}
+     </Markdown>
++    </div>
+   );
+ }
