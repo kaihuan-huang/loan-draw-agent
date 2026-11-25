@@ -66,8 +66,8 @@ Layering: API → graph (`graph.py`) → steps (`extract.py` model steps, `polic
 
 ## 6. Domain safety rules
 
-**[Rule]** A draw is approved only by a loan officer's explicit `approve`, through `/reviews/{id}/decision` or the Agent Inbox entry point (`loan_draw.inbox`); both answers are checked by `graph.officer_review`. Draws over $100,000 need two different officers. Malformed answers change nothing and ask again.
-**[Fact]** The inbox path accepts only an `edit` naming `officer` and `decision`; accept, ignore and free-text response are disabled and anything else asks again (`tests/test_inbox.py`). Officer identity is typed text in both paths.
+**[Rule]** A draw is approved only by a loan officer's explicit `approve`, through `/reviews/{id}/decision` or the Agent Inbox entry point (`loan_draw.inbox`); both answers are checked by `graph.officer_review`. Draws over $100,000 need two different officers. The officer is the holder of an `officer` API key (`loan_draw.auth`), never a name in the request body or a form field; `agent` keys cannot decide. Malformed answers change nothing and ask again.
+**[Fact]** The inbox path accepts only an `edit`; accept, ignore and free-text response are disabled and anything else asks again (`tests/test_inbox.py`). Until the inbox entry point checks keys, it still takes the officer from a typed field (gap tracked in `spec/agent-inbox.md`).
 **[Fact]** The Agent Inbox's "Mark as Resolved" ends a thread without an answer and writes no ledger row; `scripts/inbox_start.py` reviews such a draw again.
 **[Rule]** Any BLOCK finding puts the draw on hold; no answer can approve a held draw.
 **[Rule]** The officer note never states that a draw is approved, funded or paid. A note that does (`extract._CLAIMS_DONE`) is replaced by the fixed template.
@@ -75,7 +75,7 @@ Layering: API → graph (`graph.py`) → steps (`extract.py` model steps, `polic
 **[Rule]** Document-derived text and the model's note shown in the Agent Inbox are Markdown-escaped and cannot autolink (`inbox._md`); the inbox renders raw HTML and GFM autolinks.
 **[Rule]** One ledger decision per draw; the chain verifies at start-up and on `GET /ledger/verify`.
 **[Rule]** Any change to these helpers needs regression tests, including steering text and outcome-claim wording.
-**[Fact]** Enforced by tests in `tests/test_graph.py`, `tests/test_api.py`, `tests/test_inbox.py`, `tests/test_policy.py`, `tests/test_extract.py`, `tests/test_ledger_mcp_llm.py`.
+**[Fact]** Enforced by tests in `tests/test_graph.py`, `tests/test_api.py`, `tests/test_auth.py`, `tests/test_inbox.py`, `tests/test_policy.py`, `tests/test_extract.py`, `tests/test_ledger_mcp_llm.py`.
 
 ## 7. Verification rule
 

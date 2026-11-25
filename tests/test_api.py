@@ -6,10 +6,14 @@ from fastapi.testclient import TestClient
 from loan_draw.api import create_app
 from loan_draw.ledger import Ledger
 
+OFFICER_A = {"Authorization": "Bearer officer-a-key-0123456789"}
 
-def client(tmp_path=None):
+
+def client(tmp_path=None, llm=None, **kwargs):
     db = str(tmp_path / "cp.db") if tmp_path else None
-    return TestClient(create_app(llm=TruthLLM(), ledger=Ledger(), checkpoint_db=db))
+    app = create_app(llm=llm or TruthLLM(), ledger=Ledger(), checkpoint_db=db,
+                     api_keys="officer-a:officer:officer-a-key-0123456789")
+    return TestClient(app, headers=OFFICER_A, **kwargs)
 
 
 def test_review_flow_and_idempotent_start(tmp_path):
@@ -61,8 +65,7 @@ class FlakyLLM(TruthLLM):
 # reported "running" forever.
 def test_start_resumes_a_review_that_failed_mid_way(tmp_path):
     draw_id = case("clean")["draw_id"]
-    with TestClient(create_app(llm=FlakyLLM(), ledger=Ledger(), checkpoint_db=str(tmp_path / "cp.db")),
-                    raise_server_exceptions=False) as c:
+    with client(tmp_path, llm=FlakyLLM(), raise_server_exceptions=False) as c:
         assert c.post(f"/reviews/{draw_id}").status_code == 500
         r = c.post(f"/reviews/{draw_id}").json()
         assert r["status"] == "waiting_for_officer"

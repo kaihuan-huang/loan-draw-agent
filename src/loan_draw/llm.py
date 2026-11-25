@@ -1,10 +1,13 @@
 """One gateway for every model call (LiteLLM): a primary model, ordered fallbacks, and recordings.
 
 - Primary: an OpenAI-compatible vLLM server on a GPU box (`LLM_MODEL=hosted_vllm/<model>`, `LLM_API_BASE=...`).
-- Fallbacks: `LLM_FALLBACKS`, comma-separated LiteLLM model ids, tried in order when the primary fails.
-- Recordings (`LLM_CASSETTE=record|replay`, file `LLM_CASSETTE_PATH`): `record` saves every response keyed by the
-  request; `replay` answers only from the file and fails on a request it has not seen. CI and the tests replay, so
-  they need no GPU and no key, and a prompt change that was not re-recorded fails loudly instead of drifting.
+- Fallbacks: `LLM_FALLBACKS`, comma-separated LiteLLM model ids, tried in order when the primary fails. They are
+  called without `LLM_API_BASE`, so the document text goes to that provider; off unless `LLM_ALLOW_EXTERNAL=1`.
+- Recordings (`LLM_CASSETTE=record|replay`, file `LLM_CASSETTE_PATH`, default `~/.cache/loan-draw/cassette.jsonl`
+  so a recording made without a path never lands in the repository or the image): `record` saves every response keyed by the request,
+  and a failed write is an error, not a reason to try another model; `replay` answers only from the file and fails
+  on a request it has not seen. CI and the tests replay, so they need no GPU and no key, and a prompt change that
+  was not re-recorded fails loudly instead of drifting.
 """
 from __future__ import annotations
 
@@ -50,10 +53,10 @@ class Cassette:
         with self._lock:
             if key in self.rows:
                 return
-            self.rows[key] = out
             self.path.parent.mkdir(parents=True, exist_ok=True)
             with self.path.open("a") as f:
                 f.write(json.dumps({"key": key, "task": task, "out": out}) + "\n")
+            self.rows[key] = out  # only after the write: a failed write must not answer from memory later
 
 
 class Gateway:
@@ -62,11 +65,14 @@ class Gateway:
         self.model = model or os.environ.get("LLM_MODEL", "hosted_vllm/Qwen/Qwen2.5-7B-Instruct")
         env_fb = os.environ.get("LLM_FALLBACKS", "")
         self.fallbacks = fallbacks if fallbacks is not None else [m for m in env_fb.split(",") if m]
+        if self.fallbacks and os.environ.get("LLM_ALLOW_EXTERNAL") != "1":
+            raise ValueError("fallback models are called without LLM_API_BASE, so document text leaves the LAN; "
+                             "set LLM_ALLOW_EXTERNAL=1 to allow it, or leave LLM_FALLBACKS empty")
         self.api_base = api_base or os.environ.get("LLM_API_BASE")
         self.timeout = timeout
         if cassette is None and os.environ.get("LLM_CASSETTE") in ("record", "replay"):
-            cassette = Cassette(Path(os.environ.get("LLM_CASSETTE_PATH", "evals/cassettes/default.jsonl")),
-                                os.environ["LLM_CASSETTE"])
+            default = Path.home() / ".cache" / "loan-draw" / "cassette.jsonl"  # never inside the repository
+            cassette = Cassette(Path(os.environ.get("LLM_CASSETTE_PATH", default)), os.environ["LLM_CASSETTE"])
         self.cassette = cassette
 
     def _call(self, task: str, messages: list[dict], schema: type[BaseModel] | None) -> str:
@@ -88,12 +94,13 @@ class Gateway:
             try:
                 r = litellm.completion(model=model, api_base=self.api_base if i == 0 else None, **kw)
                 out = r.choices[0].message.content or ""
-                if self.cassette:
-                    self.cassette.put(key, task, out)
-                return out
             except Exception as e:  # noqa: BLE001 - try the next model, report the last error
                 log.warning("model %s failed for %s: %s", model, task, type(e).__name__)
                 last = e
+            else:  # a failed recording write is not a model failure: it raises here, never tries another model
+                if self.cassette:
+                    self.cassette.put(key, task, out)
+                return out
         raise RuntimeError(f"all models failed for {task}") from last
 
     def json(self, task: str, messages: list[dict], schema: type[BaseModel]) -> dict | None:

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import sqlite3
+import sys
+from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from conftest import case
@@ -69,3 +72,55 @@ def test_unusable_json_is_none_not_a_guess(tmp_path):
 def test_strip_fence():
     assert _strip_fence('```json\n{"a":1}\n```') == '{"a":1}'
     assert _strip_fence('{"a":1}') == '{"a":1}'
+
+
+def _fake_litellm(monkeypatch, called: list[str]) -> None:
+    """Stands in for LiteLLM: every model answers, and `called` lists the models that were sent the prompt."""
+    def completion(model, **kw):
+        called.append(model)
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(content='{"x": 3}'))])
+
+    monkeypatch.setitem(sys.modules, "litellm", SimpleNamespace(completion=completion))
+
+
+class ReadOnlyCassette(Cassette):
+    def put(self, key, task, out):
+        raise PermissionError("cassette file is read-only")
+
+
+def test_a_recording_that_cannot_be_written_is_not_sent_to_a_fallback_model(tmp_path, monkeypatch):
+    called: list[str] = []
+    _fake_litellm(monkeypatch, called)
+    monkeypatch.setenv("LLM_ALLOW_EXTERNAL", "1")
+    gw = Gateway(model="primary", fallbacks=["external/model"],
+                 cassette=ReadOnlyCassette(tmp_path / "c.jsonl", "record"))
+    with pytest.raises(PermissionError):
+        gw.json("t", [{"role": "user", "content": "hi"}], Out)
+    assert called == ["primary"]
+
+
+def test_a_recording_that_failed_to_write_is_not_answered_from_memory(tmp_path):
+    rec = Cassette(tmp_path / "c.jsonl", "record")
+    rec.path.mkdir()  # a directory where the file should be: opening it for append fails
+    with pytest.raises(OSError):
+        rec.put("k", "t", "out")
+    assert rec.get("k") is None
+
+
+def test_fallback_models_are_off_unless_external_calls_are_allowed(monkeypatch):
+    monkeypatch.delenv("LLM_ALLOW_EXTERNAL", raising=False)
+    with pytest.raises(ValueError, match="LLM_ALLOW_EXTERNAL"):
+        Gateway(model="primary", fallbacks=["external/model"])
+    monkeypatch.setenv("LLM_FALLBACKS", "external/model")
+    with pytest.raises(ValueError, match="LLM_ALLOW_EXTERNAL"):
+        Gateway(model="primary")
+
+
+def test_record_mode_writes_outside_the_repository_by_default(tmp_path, monkeypatch):
+    repo = Path(__file__).resolve().parents[1]
+    monkeypatch.chdir(repo)  # CI and the README run from the repository root
+    monkeypatch.setenv("HOME", str(tmp_path))
+    monkeypatch.setenv("LLM_CASSETTE", "record")
+    monkeypatch.delenv("LLM_CASSETTE_PATH", raising=False)
+    path = Gateway(model="none", fallbacks=[]).cassette.path.resolve()
+    assert repo not in path.parents
