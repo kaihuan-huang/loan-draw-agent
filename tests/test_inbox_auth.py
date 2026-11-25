@@ -49,7 +49,7 @@ async def test_no_keys_configured_means_nobody_gets_in(monkeypatch):
         await inbox_auth.authenticate(authorization=f"Bearer {OFFICER_KEY}", headers={})
 
 
-def test_langgraph_json_registers_the_key_check():
+async def test_langgraph_json_registers_the_key_check():
     import json
     from pathlib import Path
     cfg = json.loads((Path(__file__).resolve().parents[1] / "langgraph.json").read_text())

@@ -3,6 +3,7 @@
     uv run python scripts/inbox_start.py                      # every draw
     uv run python scripts/inbox_start.py D-5001 D-5003        # some draws
     LANGGRAPH_URL=http://127.0.0.1:2024 (default)
+    LOAN_DRAW_KEY=<key>   an `agent` key from LOAN_DRAW_API_KEYS (the server refuses requests without a known key)
 
 One thread per draw (a stable UUID derived from the draw id), so running this twice does not start a review twice;
 a review that stopped mid-way is resumed, as `POST /reviews/{id}` does. A draw that left the inbox with no decision
@@ -29,7 +30,10 @@ def thread_id(draw_id: str) -> str:
 
 
 async def main(draw_ids: list[str]) -> None:
-    client = get_client(url=os.environ.get("LANGGRAPH_URL", "http://127.0.0.1:2024"))
+    key = os.environ.get("LOAN_DRAW_KEY")
+    if not key:
+        sys.exit("set LOAN_DRAW_KEY to an agent key from LOAN_DRAW_API_KEYS")
+    client = get_client(url=os.environ.get("LANGGRAPH_URL", "http://127.0.0.1:2024"), api_key=key)
     for draw_id in draw_ids:
         tid = thread_id(draw_id)
         await client.threads.create(thread_id=tid, metadata={"draw_id": draw_id}, if_exists="do_nothing")
