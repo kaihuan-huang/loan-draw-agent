@@ -61,7 +61,8 @@ From: `intent/agent-inbox.md` (draft, not yet accepted). Author: Kaihuan Huang, 
      `docs/agent-inbox-react-markdown-10.patch` is the local fix used for verification.
   5. `langgraph dev` needs `--allow-blocking`: the ledger (SQLite) and the in-process MCP server read synchronously
      inside the async run. The FastAPI path has the same reads; moving to Postgres (README "Limits") removes this.
-  6. `langgraph dev` has no auth and listens on localhost only. Not for shared use.
+  6. `langgraph dev` checks keys (`inbox_auth`) but is a development server: in-memory threads, localhost only,
+     no TLS. Not for shared use.
 
 ## Open questions / conflicts
 See `intent/agent-inbox.md` questions 1 and 2.
